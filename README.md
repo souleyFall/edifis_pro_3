@@ -31,7 +31,7 @@ Ce projet a été développé dans le cadre d’un **hackathon** par une équipe
 
 ## 👨‍💻 L'Équipe
 
-- **Abdelbar Sadji** 
+- **Abdelbar Saji** 
 - **Alex Millon** 
 - **Souleymane FALL
 - **Stive Gamy**
