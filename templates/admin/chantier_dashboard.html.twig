@@ -1,0 +1,79 @@
+{% extends '@EasyAdmin/crud/index.html.twig' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="mb-4">🏗️Chantiers</h1>
+            {% for action in global_actions %}
+                {% if action.name == 'new' %}
+                    <a href="{{ action.linkUrl }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-plus me-1"></i> Ajouter un chantier
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    <div class="row">
+        {% for entity in entities %}
+            {% set chantier = entity.instance %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    {% if chantier.photo %}
+                        <img src={{ chantier.photo }} class="card-img-top" alt="Photo du chantier">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title d-flex justify-content-between align-items-center">
+                            {{ chantier.nom }}
+                        </h5>
+                        <p class="card-text">
+                            <strong>Adresse :</strong> {{ chantier.adresse }}
+                        </p>
+
+                        <h6 class="mt-3">🧩 Problèmes signalés</h6>
+                        <div class="mb-3">
+                            {% if chantier.problemes is not empty %}
+                                {% for probleme in chantier.problemes %}
+                                    <span class="badge bg-secondary me-1 text-white">
+                                        {{ probleme }}
+                                    </span>
+                                {% endfor %}
+                            {% else %}
+                                <p class="text-muted">Aucun problème signalé.</p>
+                            {% endif %}
+                        </div>
+
+                        <div class="mt-auto">
+                                <div class="d-flex justify-content-between">
+                                    {% for action in entity.actions %}
+                                        {% if action.name == 'detail' %}
+                                            <a href="{{ action.linkUrl }}" class="btn btn-sm btn-outline-primary" title="Voir les détails">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        {% elseif action.name == 'edit' %}
+                                            <a href="{{ action.linkUrl }}" class="btn btn-sm btn-outline-secondary" title="Modifier">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        {% elseif action.name == 'delete' %}
+                                            <a href="{{ action.linkUrl }}"
+                                               class="btn btn-sm btn-outline-danger"
+                                               title="Supprimer"
+                                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce prestataire ?')">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        {% else %}
+                                            {{ include(action.templatePath, { action: action }, with_context = false) }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <div class="alert alert-info">Aucun chantier trouvé.</div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

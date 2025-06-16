@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Espace{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row align-items-center mb-4">
+        <div class="col-md-2 text-center">
+            {#{% if user.photo %}
+                <img src="{{ asset('uploads/prestataires/' ~ user.photo) }}" class="rounded-circle img-fluid shadow" style="width: 100px;" alt="Photo de {{ user.nom }}">
+            {% else %}
+                <i class="fas fa-user-circle fa-5x text-secondary"></i>
+            {% endif %}#}
+            <img src={{user.photo}} class="rounded-circle img-fluid shadow" style="width: 100px;" alt="Photo de {{ user.nom }}">
+        </div>
+        <div class="col-md-10">
+            <h2 class="fw-bold">👋 Hello {{ user.prenom }}</h2>
+            <p class="mb-1"><strong>Poste :</strong> {{ user.poste }}</p>
+            <h6 class="mt-3">🛠️ Compétences</h6>
+            <ul class="list-inline">
+                {% for competence in user.competence %}
+                    <li class="list-inline-item badge bg-info text-dark mb-1">{{ competence }}</li>
+                {% else %}
+                    <li>Aucune compétence enregistrée.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    {% if chantier %}
+        <div class="card mb-4 shadow-sm">
+            <div class="row g-0">
+                {#{% if chantier.photo %}
+                    <div class="col-md-4">
+                        <img src="{{ asset('uploads/chantier/' ~ chantier.photo) }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="Photo du chantier">
+                    </div>
+                {% endif %}#}
+                <div class="col-md-4">
+                        <img src={{chantier.photo}} class="img-fluid rounded-start h-100 object-fit-cover" alt="Photo du chantier">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">🏗️ Chantier Assigné</h5>
+                        <p><strong>Nom :</strong> {{ chantier.nom }}</p>
+                        <p><strong>Adresse :</strong> {{ chantier.adresse }}</p>
+
+                        <a href="#" class="btn btn-primary btn-sm mb-3">🔍 Voir détails</a>
+
+                        <h6>🧩 Problèmes signalés</h6>
+                        <div class="mb-3">
+                            {% for probleme in chantier.problemes %}
+                                <span class="badge me-1 bg-secondary">
+                                    {{ probleme}}
+                                </span>
+                            {% else %}
+                                <p>Aucun problème pour ce chantier.</p>
+                            {% endfor %}
+                        </div>
+
+                        <h6>📝 Tâches assignées</h6>
+                        <ul>
+                            {#{% for tache in chantier.taches %}
+                                {% if tache.assignee == user %}
+                                    <li>
+                                        {{ tache.titre }}
+                                        {% if tache.estTerminee %}
+                                            ✅
+                                        {% endif %}
+                                    </li>
+                                {% endif %}
+                            {% else %}
+                                <li>Aucune tâche assignée.</li>
+                            {% endfor %}#}
+                                <li>Aucune tâche assignée.</li>
+                        </ul>
+
+                        <a href="#" class="btn btn-outline-warning mt-3">🚨 Signaler un problème</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-info">Aucun chantier assigné actuellement.</div>
+    {% endif %}
+</div>
+{% endblock %}

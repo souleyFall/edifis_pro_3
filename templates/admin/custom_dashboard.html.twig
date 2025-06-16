@@ -1,0 +1,44 @@
+{# templates/admin/custom_dashboard.html.twig #}
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1 class="mb-4">👋 Bienvenue, {{ app.user.prenom }}</h1>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">👷 Prestataires</h5>
+                        <p class="card-text">Gérez les comptes prestataires</p>
+                        <a href="{{ ea_url().setController('App\\Controller\\Admin\\PrestataireCrudController').setAction('index') }}" class="btn btn-primary">Voir</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">🏗️ Chantiers</h5>
+                        <p class="card-text">Gestion des chantiers</p>
+                        <a href="{{ ea_url().setController('App\\Controller\\Admin\\ChantierCrudController').setAction('index') }}" class="btn btn-success">Voir</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Affectations</h5>
+                        <p class="card-text">Gérer les affectations</p>
+                        <a href="{{ ea_url().setController('App\\Controller\\Admin\\AffectationCrudController').setAction('index') }}" class="btn btn-danger">Voir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="{{ path('app_account') }}" class="btn btn-outline-secondary">👤 Retour à mon compte</a>
+        </div>
+    </div>
+{% endblock %}
