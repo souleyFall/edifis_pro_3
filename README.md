@@ -45,7 +45,7 @@ Voici les étapes pour installer et lancer le projet en local sur ta machine.
 ### 1. 📦 Cloner le projet
 
 ```bash
-git clone https://github.com/<votre-repo>/edifis-pro.git
+git clone https://github.com/souleyFall/edifis_pro_3.git
 cd edifis-pro
 
 2. ⚙️ Installer les dépendances PHP (via Composer)
